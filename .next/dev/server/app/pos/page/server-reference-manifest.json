@@ -1,0 +1,50 @@
+{
+  "node": {
+    "407cdcd394561f2e242cfdbb0d53299e1d52fc8ce4": {
+      "workers": {
+        "app/pos/page": {
+          "moduleId": "[project]/.next-internal/server/app/pos/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getProductByBarcode",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/pos/page": "action-browser"
+      },
+      "exportedName": "getProductByBarcode",
+      "filename": "src/lib/actions.ts"
+    },
+    "703ce1cec6fb1173c8db2e67b4b493e77341ac90c3": {
+      "workers": {
+        "app/pos/page": {
+          "moduleId": "[project]/.next-internal/server/app/pos/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "completeSale",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/pos/page": "action-browser"
+      },
+      "exportedName": "completeSale",
+      "filename": "src/lib/actions.ts"
+    },
+    "00b7da2130fcff59e6ef4e2860acc4be0dc7f333a5": {
+      "workers": {
+        "app/pos/page": {
+          "moduleId": "[project]/.next-internal/server/app/pos/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getLowStockCount",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/pos/page": "action-browser"
+      },
+      "exportedName": "getLowStockCount",
+      "filename": "src/lib/actions.ts"
+    }
+  },
+  "edge": {}
+}

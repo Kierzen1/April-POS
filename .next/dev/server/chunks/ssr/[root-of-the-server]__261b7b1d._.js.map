@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":["file:///D:/Projects/April-POS/src/providers/HeroUIProvider.tsx"],"sourcesContent":["'use client';\r\n\r\nimport { HeroUIProvider } from '@heroui/react';\r\nimport { useRouter } from 'next/navigation';\r\n\r\nexport function Providers({ children }: { children: React.ReactNode }) {\r\n    const router = useRouter();\r\n\r\n    return (\r\n        <HeroUIProvider navigate={router.push}>\r\n            {children}\r\n        </HeroUIProvider>\r\n    );\r\n}\r\n"],"names":[],"mappings":";;;;;AAEA;AACA;AAHA;;;;AAKO,SAAS,UAAU,EAAE,QAAQ,EAAiC;IACjE,MAAM,SAAS,IAAA,+IAAS;IAExB,qBACI,8OAAC,kLAAc;QAAC,UAAU,OAAO,IAAI;kBAChC;;;;;;AAGb"}}]
+}

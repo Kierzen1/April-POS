@@ -1,0 +1,347 @@
+[00:00:01.485] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:01.685] Server  LOG     ✓ Ready in 1035ms
+[00:00:03.848] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:06.346] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:16.389] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:20.467] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:26.069] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:00:26.069] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:01:59.461] Server  LOG     ✓ Compiled in 3.3s
+[00:02:13.997] Server  LOG     ✓ Compiled in 853ms
+[00:02:14.732] Browser ERROR   ./src/app/admin/layout.tsx:1:3
+Parsing ecmascript source code failed
+>  1 | ```
+     |   ^
+>  2 | "use client";
+     | ^^^^^^^^^^^^^
+>  3 | 
+     | ^^^^^^^^^^^^^
+>  4 | import { AdminSidebar } from "@/components/shared/Sidebar";
+     | ^^^^^^^^^^^^^
+>  5 | import { useState } from "react";
+     | ^^^^^^^^^^^^^
+>  6 | import { Button } from "@/components/ui/button";
+     | ^^^^^^^^^^^^^
+>  7 | import { Menu, X } from "lucide-react";
+     | ^^^^^^^^^^^^^
+>  8 | import { AnimatePresence, motion } from "framer-motion";
+     | ^^^^^^^^^^^^^
+>  9 | import { NotificationBell } from "@/components/shared/NotificationBell";
+     | ^^^^^^^^^^^^^
+> 10 | import { ThemeToggle } from "@/components/shared/ThemeToggle"; // Added ThemeToggle import
+     | ^^^^^^^^^^^^^
+> 11 | 
+     | ^^^^^^^^^^^^^
+> 12 | export default function AdminLayout({
+     | ^^^^^^^^^^^^^
+> 13 |     children,
+     | ^^^^^^^^^^^^^
+> 14 | }: {
+     | ^^^^^^^^^^^^^
+> 15 |     children: React.ReactNode;
+     | ^^^^^^^^^^^^^
+> 16 | }) {
+     | ^^^^^^^^^^^^^
+> 17 |     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+     | ^^^^^^^^^^^^^
+> 18 | 
+     | ^^^^^^^^^^^^^
+> 19 |     return (
+     | ^^^^^^^^^^^^^
+> 20 |         <div className="flex flex-col md:flex-row h-screen w-full bg-background overflow-hidden relative">
+     | ^^^^^^^^^^^^^
+> 21 |             {/* Mobile Header */}
+     | ^^^^^^^^^^^^^
+> 22 |             <header className="md:hidden flex items-center justify-between p-4 border-b border-border bg-card sticky top-0 z-50">
+     | ^^^^^^^^^^^^^
+> 23 |                 <h1 className="text-xl font-black text-primary italic tracking-tighter">APRIL.POS</h1>
+     | ^^^^^^^^^^^^^
+> 24 |                 <div className="flex items-center gap-2">
+     | ^^^^^^^^^^^^^
+> 25 |                     <NotificationBell />
+     | ^^^^^^^^^^^^^
+> 26 |                     <Button variant="ghost" size="icon" onClick={() => setIsSidebarOpen(true)}>
+     | ^^^^^^^^^^^^^
+> 27 |                         <Menu className="w-6 h-6" />
+     | ^^^^^^^^^^^^^
+> 28 |                     </Button>
+     | ^^^^^^^^^^^^^
+> 29 |                 </div>
+     | ^^^^^^^^^^^^^
+> 30 |             </header>
+     | ^^^^^^^^^^^^^
+> 31 | 
+     | ^^^^^^^^^^^^^
+> 32 |             {/* Desktop Sidebar */}
+     | ^^^^^^^^^^^^^
+> 33 |             <div className="hidden md:block w-64 shrink-0 h-full z-40 border-r border-border">
+     | ^^^^^^^^^^^^^
+> 34 |                 <AdminSidebar />
+     | ^^^^^^^^^^^^^
+> 35 |             </div>
+     | ^^^^^^^^^^^^^
+> 36 | 
+     | ^^^^^^^^^^^^^
+> 37 |             {/* Mobile Sidebar Overlay */}
+     | ^^^^^^^^^^^^^
+> 38 |             <AnimatePresence>
+     | ^^^^^^^^^^^^^
+> 39 |                 {isSidebarOpen && (
+     | ^^^^^^^^^^^^^
+> 40 |                     <>
+     | ^^^^^^^^^^^^^
+> 41 |                         <motion.div
+     | ^^^^^^^^^^^^^
+> 42 |                             initial={{ opacity: 0 }}
+     | ^^^^^^^^^^^^^
+> 43 |                             animate={{ opacity: 1 }}
+     | ^^^^^^^^^^^^^
+> 44 |                             exit={{ opacity: 0 }}
+     | ^^^^^^^^^^^^^
+> 45 |                             onClick={() => setIsSidebarOpen(false)}
+     | ^^^^^^^^^^^^^
+> 46 |                             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] md:hidden"
+     | ^^^^^^^^^^^^^
+> 47 |                         />
+     | ^^^^^^^^^^^^^
+> 48 |                         <motion.div
+     | ^^^^^^^^^^^^^
+> 49 |                             initial={{ x: "-100%" }}
+     | ^^^^^^^^^^^^^
+> 50 |                             animate={{ x: 0 }}
+     | ^^^^^^^^^^^^^
+> 51 |                             exit={{ x: "-100%" }}
+     | ^^^^^^^^^^^^^
+> 52 |                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
+     | ^^^^^^^^^^^^^
+> 53 |                             className="fixed inset-y-0 left-0 w-[280px] bg-card z-[100] md:hidden shadow-2xl"
+     | ^^^^^^^^^^^^^
+> 54 |                         >
+     | ^^^^^^^^^^^^^
+> 55 |                             <div className="flex flex-col h-full">
+     | ^^^^^^^^^^^^^
+> 56 |                                 <div className="p-4 flex justify-end border-b border-border">
+     | ^^^^^^^^^^^^^
+> 57 |                                     <Button variant="ghost" size="icon" onClick={() => setIsSidebarOpen(false)}>
+     | ^^^^^^^^^^^^^
+> 58 |                                         <X className="w-6 h-6" />
+     | ^^^^^^^^^^^^^
+> 59 |                                     </Button>
+     | ^^^^^^^^^^^^^
+> 60 |                                 </div>
+     | ^^^^^^^^^^^^^
+> 61 |                                 <div className="flex-1 overflow-y-auto">
+     | ^^^^^^^^^^^^^
+> 62 |                                     <AdminSidebar />
+     | ^^^^^^^^^^^^^
+> 63 |                                 </div>
+     | ^^^^^^^^^^^^^
+> 64 |                             </div>
+     | ^^^^^^^^^^^^^
+> 65 |                         </motion.div>
+     | ^^^^^^^^^^^^^
+> 66 |                     </>
+     | ^^^^^^^^^^^^^
+> 67 |                 )}
+     | ^^^^^^^^^^^^^
+> 68 |             </AnimatePresence>
+     | ^^^^^^^^^^^^^
+> 69 | 
+     | ^^^^^^^^^^^^^
+> 70 |             <main className="flex-1 h-full overflow-y-auto bg-zinc-50/30 dark:bg-black relative z-10">
+     | ^^^^^^^^^^^^^
+> 71 |                 <div className="p-4 md:p-8 max-w-7xl mx-auto w-full">
+     | ^^^^^^^^^^^^^
+> 72 |                     {children}
+     | ^^^^^^^^^^^^^
+> 73 |                 </div>
+     | ^^^^^^^^^^^^^
+> 74 |             </main>
+     | ^^^^^^^^^^^^^
+> 75 |         </div>
+     | ^^^^^^^^^^^^^
+> 76 |     );
+     | ^^^^^^^^^^^^^
+> 77 | }
+     | ^^^^^^^^^^^^^
+> 78 | 
+     | ^
+
+Unterminated template
+[00:02:28.333] Server  LOG     ✓ Compiled in 626ms
+[00:02:28.733] Browser ERROR   ./src/app/admin/layout.tsx:1:3
+Parsing ecmascript source code failed
+>  1 | ```
+     |   ^
+>  2 | "use client";
+     | ^^^^^^^^^^^^^
+>  3 | 
+     | ^^^^^^^^^^^^^
+>  4 | import { AdminSidebar } from "@/components/shared/Sidebar";
+     | ^^^^^^^^^^^^^
+>  5 | import { useState } from "react";
+     | ^^^^^^^^^^^^^
+>  6 | import { Button } from "@/components/ui/button";
+     | ^^^^^^^^^^^^^
+>  7 | import { Menu, X } from "lucide-react";
+     | ^^^^^^^^^^^^^
+>  8 | import { AnimatePresence, motion } from "framer-motion";
+     | ^^^^^^^^^^^^^
+>  9 | import { NotificationBell } from "@/components/shared/NotificationBell";
+     | ^^^^^^^^^^^^^
+> 10 | import { ThemeToggle } from "@/components/shared/ThemeToggle"; // Added ThemeToggle import
+     | ^^^^^^^^^^^^^
+> 11 | 
+     | ^^^^^^^^^^^^^
+> 12 | export default function AdminLayout({
+     | ^^^^^^^^^^^^^
+> 13 |     children,
+     | ^^^^^^^^^^^^^
+> 14 | }: {
+     | ^^^^^^^^^^^^^
+> 15 |     children: React.ReactNode;
+     | ^^^^^^^^^^^^^
+> 16 | }) {
+     | ^^^^^^^^^^^^^
+> 17 |     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+     | ^^^^^^^^^^^^^
+> 18 | 
+     | ^^^^^^^^^^^^^
+> 19 |     return (
+     | ^^^^^^^^^^^^^
+> 20 |         <div className="flex flex-col md:flex-row h-screen w-full bg-background overflow-hidden relative">
+     | ^^^^^^^^^^^^^
+> 21 |             {/* Mobile Header */}
+     | ^^^^^^^^^^^^^
+> 22 |             <header className="md:hidden flex items-center justify-between p-4 border-b border-border bg-card sticky top-0 z-50">
+     | ^^^^^^^^^^^^^
+> 23 |                 <h1 className="text-xl font-black text-primary italic tracking-tighter">APRIL.POS</h1>
+     | ^^^^^^^^^^^^^
+> 24 |                 <div className="flex items-center gap-2">
+     | ^^^^^^^^^^^^^
+> 25 |                     <NotificationBell />
+     | ^^^^^^^^^^^^^
+> 26 |                     <Button variant="ghost" size="icon" onClick={() => setIsSidebarOpen(true)}>
+     | ^^^^^^^^^^^^^
+> 27 |                         <Menu className="w-6 h-6" />
+     | ^^^^^^^^^^^^^
+> 28 |                     </Button>
+     | ^^^^^^^^^^^^^
+> 29 |                 </div>
+     | ^^^^^^^^^^^^^
+> 30 |             </header>
+     | ^^^^^^^^^^^^^
+> 31 | 
+     | ^^^^^^^^^^^^^
+> 32 |             {/* Desktop Sidebar */}
+     | ^^^^^^^^^^^^^
+> 33 |             <div className="hidden md:block w-64 shrink-0 h-full z-40 border-r border-border">
+     | ^^^^^^^^^^^^^
+> 34 |                 <AdminSidebar />
+     | ^^^^^^^^^^^^^
+> 35 |             </div>
+     | ^^^^^^^^^^^^^
+> 36 | 
+     | ^^^^^^^^^^^^^
+> 37 |             {/* Mobile Sidebar Overlay */}
+     | ^^^^^^^^^^^^^
+> 38 |             <AnimatePresence>
+     | ^^^^^^^^^^^^^
+> 39 |                 {isSidebarOpen && (
+     | ^^^^^^^^^^^^^
+> 40 |                     <>
+     | ^^^^^^^^^^^^^
+> 41 |                         <motion.div
+     | ^^^^^^^^^^^^^
+> 42 |                             initial={{ opacity: 0 }}
+     | ^^^^^^^^^^^^^
+> 43 |                             animate={{ opacity: 1 }}
+     | ^^^^^^^^^^^^^
+> 44 |                             exit={{ opacity: 0 }}
+     | ^^^^^^^^^^^^^
+> 45 |                             onClick={() => setIsSidebarOpen(false)}
+     | ^^^^^^^^^^^^^
+> 46 |                             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] md:hidden"
+     | ^^^^^^^^^^^^^
+> 47 |                         />
+     | ^^^^^^^^^^^^^
+> 48 |                         <motion.div
+     | ^^^^^^^^^^^^^
+> 49 |                             initial={{ x: "-100%" }}
+     | ^^^^^^^^^^^^^
+> 50 |                             animate={{ x: 0 }}
+     | ^^^^^^^^^^^^^
+> 51 |                             exit={{ x: "-100%" }}
+     | ^^^^^^^^^^^^^
+> 52 |                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
+     | ^^^^^^^^^^^^^
+> 53 |                             className="fixed inset-y-0 left-0 w-[280px] bg-card z-[100] md:hidden shadow-2xl"
+     | ^^^^^^^^^^^^^
+> 54 |                         >
+     | ^^^^^^^^^^^^^
+> 55 |                             <div className="flex flex-col h-full">
+     | ^^^^^^^^^^^^^
+> 56 |                                 <div className="p-4 flex justify-end border-b border-border">
+     | ^^^^^^^^^^^^^
+> 57 |                                     <Button variant="ghost" size="icon" onClick={() => setIsSidebarOpen(false)}>
+     | ^^^^^^^^^^^^^
+> 58 |                                         <X className="w-6 h-6" />
+     | ^^^^^^^^^^^^^
+> 59 |                                     </Button>
+     | ^^^^^^^^^^^^^
+> 60 |                                 </div>
+     | ^^^^^^^^^^^^^
+> 61 |                                 <div className="flex-1 overflow-y-auto">
+     | ^^^^^^^^^^^^^
+> 62 |                                     <AdminSidebar />
+     | ^^^^^^^^^^^^^
+> 63 |                                 </div>
+     | ^^^^^^^^^^^^^
+> 64 |                             </div>
+     | ^^^^^^^^^^^^^
+> 65 |                         </motion.div>
+     | ^^^^^^^^^^^^^
+> 66 |                     </>
+     | ^^^^^^^^^^^^^
+> 67 |                 )}
+     | ^^^^^^^^^^^^^
+> 68 |             </AnimatePresence>
+     | ^^^^^^^^^^^^^
+> 69 | 
+     | ^^^^^^^^^^^^^
+> 70 |             <main className="flex-1 h-full overflow-y-auto bg-zinc-50/30 dark:bg-black relative z-10">
+     | ^^^^^^^^^^^^^
+> 71 |                 <div className="p-4 md:p-8 max-w-7xl mx-auto w-full">
+     | ^^^^^^^^^^^^^
+> 72 |                     {children}
+     | ^^^^^^^^^^^^^
+> 73 |                 </div>
+     | ^^^^^^^^^^^^^
+> 74 |             </main>
+     | ^^^^^^^^^^^^^
+> 75 |         </div>
+     | ^^^^^^^^^^^^^
+> 76 |     );
+     | ^^^^^^^^^^^^^
+> 77 | }
+     | ^^^^^^^^^^^^^
+> 78 | 
+     | ^
+
+Unterminated template
+[00:02:40.035] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:00.226] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:01.157] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:03:01.157] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:03:37.885] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:03:37.885] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:03:44.128] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:03:44.128] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:03:50.684] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:03:50.684] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:04:18.744] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:04:18.744] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[02:25:43.345] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:25:44.303] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:25:45.186] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:25:48.926] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

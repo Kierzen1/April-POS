@@ -1,0 +1,103 @@
+{
+  "node": {
+    "407cdcd394561f2e242cfdbb0d53299e1d52fc8ce4": {
+      "workers": {
+        "app/pos/page": {
+          "moduleId": "[project]/.next-internal/server/app/pos/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getProductByBarcode",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/pos/page": "action-browser"
+      },
+      "filename": "src/lib/actions.ts",
+      "exportedName": "getProductByBarcode"
+    },
+    "703ce1cec6fb1173c8db2e67b4b493e77341ac90c3": {
+      "workers": {
+        "app/pos/page": {
+          "moduleId": "[project]/.next-internal/server/app/pos/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "completeSale",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/pos/page": "action-browser"
+      },
+      "filename": "src/lib/actions.ts",
+      "exportedName": "completeSale"
+    },
+    "00b7da2130fcff59e6ef4e2860acc4be0dc7f333a5": {
+      "workers": {
+        "app/admin/products/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getLowStockCount",
+          "filename": "src/lib/actions.ts"
+        },
+        "app/pos/page": {
+          "moduleId": "[project]/.next-internal/server/app/pos/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getLowStockCount",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/products/page": "action-browser",
+        "app/pos/page": "action-browser"
+      },
+      "filename": "src/lib/actions.ts",
+      "exportedName": "getLowStockCount"
+    },
+    "00df78ebb5383cb59f76e1fec79847930b21c1e633": {
+      "workers": {
+        "app/admin/products/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getProducts",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/products/page": "action-browser"
+      },
+      "filename": "src/lib/actions.ts",
+      "exportedName": "getProducts"
+    },
+    "40eea97e91cf7ed8cacdab14034cf02133cea0b866": {
+      "workers": {
+        "app/admin/products/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "upsertProduct",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/products/page": "action-browser"
+      },
+      "filename": "src/lib/actions.ts",
+      "exportedName": "upsertProduct"
+    },
+    "403e3f9c60d3a714533fe1cfb72328b31492e38e5d": {
+      "workers": {
+        "app/admin/products/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "deleteProduct",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/products/page": "action-browser"
+      },
+      "filename": "src/lib/actions.ts",
+      "exportedName": "deleteProduct"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "1zEBmIZRbrI5wF8HSXCWoQu3Nh9uW4XVhJ3Du8PhIm8="
+}

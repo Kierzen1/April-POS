@@ -1,6 +1,6 @@
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import prisma from "@/lib/prisma"
+import { adminDb } from "@/lib/firebase-admin"
 import bcrypt from "bcryptjs"
 
 export const authOptions: NextAuthOptions = {
@@ -14,18 +14,30 @@ export const authOptions: NextAuthOptions = {
             async authorize(credentials) {
                 if (!credentials?.email || !credentials?.password) return null
 
-                const user = await prisma.user.findUnique({
-                    where: { email: credentials.email }
-                })
+                const usersSnap = await adminDb.collection("users").where("email", "==", credentials.email).get();
 
-                if (!user) return null
+                if (usersSnap.empty) {
+                    console.log(`Login failed: No user found with email ${credentials.email}`);
+                    return null
+                }
+
+                const userDoc = usersSnap.docs[0];
+                const user = userDoc.data();
+
+                if (!user.password) {
+                    console.log(`Login failed: User ${credentials.email} has no password set in Firestore.`);
+                    return null;
+                }
 
                 const isValid = await bcrypt.compare(credentials.password, user.password)
 
-                if (!isValid) return null
+                if (!isValid) {
+                    console.log(`Login failed: Invalid password for user ${credentials.email}`);
+                    return null
+                }
 
                 return {
-                    id: user.id,
+                    id: userDoc.id,
                     email: user.email,
                     name: user.name,
                     role: user.role,

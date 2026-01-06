@@ -42,13 +42,15 @@ if ("TURBOPACK compile-time truthy", 1) globalForPrisma.prisma = prisma;
 "[project]/src/lib/actions.ts [app-rsc] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-/* __next_internal_action_entry_do_not_use__ [{"0010a0e7e03244c85b1ef1e76c577415abfc878172":"getUsers","009d9c4f32d6b7eabfbb33c4bdababb53aed6d5f5d":"getTransactions","00df78ebb5383cb59f76e1fec79847930b21c1e633":"getProducts","403e3f9c60d3a714533fe1cfb72328b31492e38e5d":"deleteProduct","4060053ab880f036dc2cbd5ed233bade4acca2a179":"registerUser","407cdcd394561f2e242cfdbb0d53299e1d52fc8ce4":"getProductByBarcode","40dbf2964ef7daa9133c2476e2c0b9d1ea785a590e":"adminCreateUser","40e676a01cbb53febeaec99ec96860933e8c2ec0fd":"toggleUserActivation","40eea97e91cf7ed8cacdab14034cf02133cea0b866":"upsertProduct","703ce1cec6fb1173c8db2e67b4b493e77341ac90c3":"completeSale"},"",""] */ __turbopack_context__.s([
+/* __next_internal_action_entry_do_not_use__ [{"0010a0e7e03244c85b1ef1e76c577415abfc878172":"getUsers","009d9c4f32d6b7eabfbb33c4bdababb53aed6d5f5d":"getTransactions","00b7da2130fcff59e6ef4e2860acc4be0dc7f333a5":"getLowStockCount","00df78ebb5383cb59f76e1fec79847930b21c1e633":"getProducts","403e3f9c60d3a714533fe1cfb72328b31492e38e5d":"deleteProduct","4060053ab880f036dc2cbd5ed233bade4acca2a179":"registerUser","407cdcd394561f2e242cfdbb0d53299e1d52fc8ce4":"getProductByBarcode","40dbf2964ef7daa9133c2476e2c0b9d1ea785a590e":"adminCreateUser","40e676a01cbb53febeaec99ec96860933e8c2ec0fd":"toggleUserActivation","40eea97e91cf7ed8cacdab14034cf02133cea0b866":"upsertProduct","703ce1cec6fb1173c8db2e67b4b493e77341ac90c3":"completeSale"},"",""] */ __turbopack_context__.s([
     "adminCreateUser",
     ()=>adminCreateUser,
     "completeSale",
     ()=>completeSale,
     "deleteProduct",
     ()=>deleteProduct,
+    "getLowStockCount",
+    ()=>getLowStockCount,
     "getProductByBarcode",
     ()=>getProductByBarcode,
     "getProducts",
@@ -237,6 +239,21 @@ async function getProducts() {
         };
     });
 }
+async function getLowStockCount() {
+    const products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].product.findMany({
+        select: {
+            id: true,
+            name: true,
+            stock: true,
+            lowStockThreshold: true
+        }
+    });
+    const lowStockItems = products.filter((p)=>p.stock <= (p.lowStockThreshold || 5));
+    return {
+        count: lowStockItems.length,
+        items: lowStockItems
+    };
+}
 async function getProductByBarcode(barcode) {
     const trimmedBarcode = barcode.trim();
     const product = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].product.findUnique({
@@ -382,6 +399,7 @@ async function getTransactions() {
     getUsers,
     toggleUserActivation,
     getProducts,
+    getLowStockCount,
     getProductByBarcode,
     upsertProduct,
     deleteProduct,
@@ -393,6 +411,7 @@ async function getTransactions() {
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getUsers, "0010a0e7e03244c85b1ef1e76c577415abfc878172", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(toggleUserActivation, "40e676a01cbb53febeaec99ec96860933e8c2ec0fd", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getProducts, "00df78ebb5383cb59f76e1fec79847930b21c1e633", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getLowStockCount, "00b7da2130fcff59e6ef4e2860acc4be0dc7f333a5", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getProductByBarcode, "407cdcd394561f2e242cfdbb0d53299e1d52fc8ce4", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(upsertProduct, "40eea97e91cf7ed8cacdab14034cf02133cea0b866", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(deleteProduct, "403e3f9c60d3a714533fe1cfb72328b31492e38e5d", null);
@@ -405,13 +424,16 @@ async function getTransactions() {
 __turbopack_context__.s([]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/actions.ts [app-rsc] (ecmascript)");
 ;
+;
 }),
 "[project]/.next-internal/server/app/admin/transactions/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
 __turbopack_context__.s([
     "009d9c4f32d6b7eabfbb33c4bdababb53aed6d5f5d",
-    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getTransactions"]
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getTransactions"],
+    "00b7da2130fcff59e6ef4e2860acc4be0dc7f333a5",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getLowStockCount"]
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f2e$next$2d$internal$2f$server$2f$app$2f$admin$2f$transactions$2f$page$2f$actions$2e$js__$7b$__ACTIONS_MODULE0__$3d3e$__$225b$project$5d2f$src$2f$lib$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$2922$__$7d$__$5b$app$2d$rsc$5d$__$28$server__actions__loader$2c$__ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i('[project]/.next-internal/server/app/admin/transactions/page/actions.js { ACTIONS_MODULE0 => "[project]/src/lib/actions.ts [app-rsc] (ecmascript)" } [app-rsc] (server actions loader, ecmascript) <locals>');
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/actions.ts [app-rsc] (ecmascript)");

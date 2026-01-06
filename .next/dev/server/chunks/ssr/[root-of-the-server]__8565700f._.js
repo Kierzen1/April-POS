@@ -42,13 +42,15 @@ if ("TURBOPACK compile-time truthy", 1) globalForPrisma.prisma = prisma;
 "[project]/src/lib/actions.ts [app-rsc] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-/* __next_internal_action_entry_do_not_use__ [{"0010a0e7e03244c85b1ef1e76c577415abfc878172":"getUsers","009d9c4f32d6b7eabfbb33c4bdababb53aed6d5f5d":"getTransactions","00df78ebb5383cb59f76e1fec79847930b21c1e633":"getProducts","403e3f9c60d3a714533fe1cfb72328b31492e38e5d":"deleteProduct","4060053ab880f036dc2cbd5ed233bade4acca2a179":"registerUser","407cdcd394561f2e242cfdbb0d53299e1d52fc8ce4":"getProductByBarcode","40dbf2964ef7daa9133c2476e2c0b9d1ea785a590e":"adminCreateUser","40e676a01cbb53febeaec99ec96860933e8c2ec0fd":"toggleUserActivation","40eea97e91cf7ed8cacdab14034cf02133cea0b866":"upsertProduct","703ce1cec6fb1173c8db2e67b4b493e77341ac90c3":"completeSale"},"",""] */ __turbopack_context__.s([
+/* __next_internal_action_entry_do_not_use__ [{"0010a0e7e03244c85b1ef1e76c577415abfc878172":"getUsers","009d9c4f32d6b7eabfbb33c4bdababb53aed6d5f5d":"getTransactions","00b7da2130fcff59e6ef4e2860acc4be0dc7f333a5":"getLowStockCount","00df78ebb5383cb59f76e1fec79847930b21c1e633":"getProducts","403e3f9c60d3a714533fe1cfb72328b31492e38e5d":"deleteProduct","4060053ab880f036dc2cbd5ed233bade4acca2a179":"registerUser","407cdcd394561f2e242cfdbb0d53299e1d52fc8ce4":"getProductByBarcode","40dbf2964ef7daa9133c2476e2c0b9d1ea785a590e":"adminCreateUser","40e676a01cbb53febeaec99ec96860933e8c2ec0fd":"toggleUserActivation","40eea97e91cf7ed8cacdab14034cf02133cea0b866":"upsertProduct","703ce1cec6fb1173c8db2e67b4b493e77341ac90c3":"completeSale"},"",""] */ __turbopack_context__.s([
     "adminCreateUser",
     ()=>adminCreateUser,
     "completeSale",
     ()=>completeSale,
     "deleteProduct",
     ()=>deleteProduct,
+    "getLowStockCount",
+    ()=>getLowStockCount,
     "getProductByBarcode",
     ()=>getProductByBarcode,
     "getProducts",
@@ -215,33 +217,71 @@ async function toggleUserActivation(userId) {
 }
 async function getProducts() {
     const products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].product.findMany({
+        include: {
+            items: {
+                select: {
+                    quantity: true
+                }
+            }
+        },
         orderBy: {
             updatedAt: "desc"
         }
     });
-    // Convert Decimal to number for frontend compatibility
-    return products.map((p)=>({
+    // Convert Decimal to number and calculate sold count
+    return products.map((p)=>{
+        const soldCount = p.items.reduce((sum, item)=>sum + item.quantity, 0);
+        return {
             ...p,
-            price: Number(p.price)
-        }));
+            price: Number(p.price),
+            soldCount,
+            items: undefined // Remove items array to keep object clean
+        };
+    });
+}
+async function getLowStockCount() {
+    const products = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].product.findMany({
+        select: {
+            id: true,
+            name: true,
+            stock: true,
+            lowStockThreshold: true
+        }
+    });
+    const lowStockItems = products.filter((p)=>p.stock <= (p.lowStockThreshold || 5));
+    return {
+        count: lowStockItems.length,
+        items: lowStockItems
+    };
 }
 async function getProductByBarcode(barcode) {
     const trimmedBarcode = barcode.trim();
     const product = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].product.findUnique({
         where: {
             barcode: trimmedBarcode
+        },
+        include: {
+            items: {
+                select: {
+                    quantity: true
+                }
+            }
         }
     });
     if (!product) return null;
+    const soldCount = product.items.reduce((sum, item)=>sum + item.quantity, 0);
     return {
         ...product,
-        price: Number(product.price)
+        price: Number(product.price),
+        soldCount,
+        items: undefined
     };
 }
 async function upsertProduct(data) {
-    const { id, barcode, name, price, stock, category, image } = data;
+    const { id, barcode, name, price, stock, lowStockThreshold, category, image } = data;
     const parsedPrice = new __TURBOPACK__imported__module__$5b$externals$5d2f40$prisma$2f$client__$5b$external$5d$__$2840$prisma$2f$client$2c$__cjs$2c$__$5b$project$5d2f$node_modules$2f40$prisma$2f$client$29$__["Prisma"].Decimal(parseFloat(price) || 0);
     const parsedStock = parseInt(stock) || 0;
+    const parsedThreshold = parseInt(lowStockThreshold) || 5;
     if (id) {
         await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].product.update({
             where: {
@@ -252,6 +292,7 @@ async function upsertProduct(data) {
                 name,
                 price: parsedPrice,
                 stock: parsedStock,
+                lowStockThreshold: parsedThreshold,
                 category,
                 image
             }
@@ -263,6 +304,7 @@ async function upsertProduct(data) {
                 name,
                 price: parsedPrice,
                 stock: parsedStock,
+                lowStockThreshold: parsedThreshold,
                 category,
                 image
             }
@@ -342,7 +384,11 @@ async function getTransactions() {
             total: Number(tx.total),
             items: tx.items.map((item)=>({
                     ...item,
-                    priceAtTime: Number(item.priceAtTime)
+                    priceAtTime: Number(item.priceAtTime),
+                    product: item.product ? {
+                        ...item.product,
+                        price: Number(item.product.price)
+                    } : null
                 }))
         }));
 }
@@ -353,6 +399,7 @@ async function getTransactions() {
     getUsers,
     toggleUserActivation,
     getProducts,
+    getLowStockCount,
     getProductByBarcode,
     upsertProduct,
     deleteProduct,
@@ -364,6 +411,7 @@ async function getTransactions() {
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getUsers, "0010a0e7e03244c85b1ef1e76c577415abfc878172", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(toggleUserActivation, "40e676a01cbb53febeaec99ec96860933e8c2ec0fd", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getProducts, "00df78ebb5383cb59f76e1fec79847930b21c1e633", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getLowStockCount, "00b7da2130fcff59e6ef4e2860acc4be0dc7f333a5", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getProductByBarcode, "407cdcd394561f2e242cfdbb0d53299e1d52fc8ce4", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(upsertProduct, "40eea97e91cf7ed8cacdab14034cf02133cea0b866", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(deleteProduct, "403e3f9c60d3a714533fe1cfb72328b31492e38e5d", null);
@@ -378,6 +426,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$actions$2e$ts_
 ;
 ;
 ;
+;
 }),
 "[project]/.next-internal/server/app/admin/users/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -385,6 +434,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$actions$2e$ts_
 __turbopack_context__.s([
     "0010a0e7e03244c85b1ef1e76c577415abfc878172",
     ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getUsers"],
+    "00b7da2130fcff59e6ef4e2860acc4be0dc7f333a5",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getLowStockCount"],
     "40dbf2964ef7daa9133c2476e2c0b9d1ea785a590e",
     ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["adminCreateUser"],
     "40e676a01cbb53febeaec99ec96860933e8c2ec0fd",

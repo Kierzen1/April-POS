@@ -1,347 +1,1990 @@
-[00:00:01.485] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
-[00:00:01.685] Server  LOG     ✓ Ready in 1035ms
-[00:00:03.848] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:06.346] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:16.389] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:20.467] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:26.069] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:00:26.069] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:01:59.461] Server  LOG     ✓ Compiled in 3.3s
-[00:02:13.997] Server  LOG     ✓ Compiled in 853ms
-[00:02:14.732] Browser ERROR   ./src/app/admin/layout.tsx:1:3
-Parsing ecmascript source code failed
->  1 | ```
-     |   ^
->  2 | "use client";
-     | ^^^^^^^^^^^^^
->  3 | 
-     | ^^^^^^^^^^^^^
->  4 | import { AdminSidebar } from "@/components/shared/Sidebar";
-     | ^^^^^^^^^^^^^
->  5 | import { useState } from "react";
-     | ^^^^^^^^^^^^^
->  6 | import { Button } from "@/components/ui/button";
-     | ^^^^^^^^^^^^^
->  7 | import { Menu, X } from "lucide-react";
-     | ^^^^^^^^^^^^^
->  8 | import { AnimatePresence, motion } from "framer-motion";
-     | ^^^^^^^^^^^^^
->  9 | import { NotificationBell } from "@/components/shared/NotificationBell";
-     | ^^^^^^^^^^^^^
-> 10 | import { ThemeToggle } from "@/components/shared/ThemeToggle"; // Added ThemeToggle import
-     | ^^^^^^^^^^^^^
-> 11 | 
-     | ^^^^^^^^^^^^^
-> 12 | export default function AdminLayout({
-     | ^^^^^^^^^^^^^
-> 13 |     children,
-     | ^^^^^^^^^^^^^
-> 14 | }: {
-     | ^^^^^^^^^^^^^
-> 15 |     children: React.ReactNode;
-     | ^^^^^^^^^^^^^
-> 16 | }) {
-     | ^^^^^^^^^^^^^
-> 17 |     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-     | ^^^^^^^^^^^^^
-> 18 | 
-     | ^^^^^^^^^^^^^
-> 19 |     return (
-     | ^^^^^^^^^^^^^
-> 20 |         <div className="flex flex-col md:flex-row h-screen w-full bg-background overflow-hidden relative">
-     | ^^^^^^^^^^^^^
-> 21 |             {/* Mobile Header */}
-     | ^^^^^^^^^^^^^
-> 22 |             <header className="md:hidden flex items-center justify-between p-4 border-b border-border bg-card sticky top-0 z-50">
-     | ^^^^^^^^^^^^^
-> 23 |                 <h1 className="text-xl font-black text-primary italic tracking-tighter">APRIL.POS</h1>
-     | ^^^^^^^^^^^^^
-> 24 |                 <div className="flex items-center gap-2">
-     | ^^^^^^^^^^^^^
-> 25 |                     <NotificationBell />
-     | ^^^^^^^^^^^^^
-> 26 |                     <Button variant="ghost" size="icon" onClick={() => setIsSidebarOpen(true)}>
-     | ^^^^^^^^^^^^^
-> 27 |                         <Menu className="w-6 h-6" />
-     | ^^^^^^^^^^^^^
-> 28 |                     </Button>
-     | ^^^^^^^^^^^^^
-> 29 |                 </div>
-     | ^^^^^^^^^^^^^
-> 30 |             </header>
-     | ^^^^^^^^^^^^^
-> 31 | 
-     | ^^^^^^^^^^^^^
-> 32 |             {/* Desktop Sidebar */}
-     | ^^^^^^^^^^^^^
-> 33 |             <div className="hidden md:block w-64 shrink-0 h-full z-40 border-r border-border">
-     | ^^^^^^^^^^^^^
-> 34 |                 <AdminSidebar />
-     | ^^^^^^^^^^^^^
-> 35 |             </div>
-     | ^^^^^^^^^^^^^
-> 36 | 
-     | ^^^^^^^^^^^^^
-> 37 |             {/* Mobile Sidebar Overlay */}
-     | ^^^^^^^^^^^^^
-> 38 |             <AnimatePresence>
-     | ^^^^^^^^^^^^^
-> 39 |                 {isSidebarOpen && (
-     | ^^^^^^^^^^^^^
-> 40 |                     <>
-     | ^^^^^^^^^^^^^
-> 41 |                         <motion.div
-     | ^^^^^^^^^^^^^
-> 42 |                             initial={{ opacity: 0 }}
-     | ^^^^^^^^^^^^^
-> 43 |                             animate={{ opacity: 1 }}
-     | ^^^^^^^^^^^^^
-> 44 |                             exit={{ opacity: 0 }}
-     | ^^^^^^^^^^^^^
-> 45 |                             onClick={() => setIsSidebarOpen(false)}
-     | ^^^^^^^^^^^^^
-> 46 |                             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] md:hidden"
-     | ^^^^^^^^^^^^^
-> 47 |                         />
-     | ^^^^^^^^^^^^^
-> 48 |                         <motion.div
-     | ^^^^^^^^^^^^^
-> 49 |                             initial={{ x: "-100%" }}
-     | ^^^^^^^^^^^^^
-> 50 |                             animate={{ x: 0 }}
-     | ^^^^^^^^^^^^^
-> 51 |                             exit={{ x: "-100%" }}
-     | ^^^^^^^^^^^^^
-> 52 |                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-     | ^^^^^^^^^^^^^
-> 53 |                             className="fixed inset-y-0 left-0 w-[280px] bg-card z-[100] md:hidden shadow-2xl"
-     | ^^^^^^^^^^^^^
-> 54 |                         >
-     | ^^^^^^^^^^^^^
-> 55 |                             <div className="flex flex-col h-full">
-     | ^^^^^^^^^^^^^
-> 56 |                                 <div className="p-4 flex justify-end border-b border-border">
-     | ^^^^^^^^^^^^^
-> 57 |                                     <Button variant="ghost" size="icon" onClick={() => setIsSidebarOpen(false)}>
-     | ^^^^^^^^^^^^^
-> 58 |                                         <X className="w-6 h-6" />
-     | ^^^^^^^^^^^^^
-> 59 |                                     </Button>
-     | ^^^^^^^^^^^^^
-> 60 |                                 </div>
-     | ^^^^^^^^^^^^^
-> 61 |                                 <div className="flex-1 overflow-y-auto">
-     | ^^^^^^^^^^^^^
-> 62 |                                     <AdminSidebar />
-     | ^^^^^^^^^^^^^
-> 63 |                                 </div>
-     | ^^^^^^^^^^^^^
-> 64 |                             </div>
-     | ^^^^^^^^^^^^^
-> 65 |                         </motion.div>
-     | ^^^^^^^^^^^^^
-> 66 |                     </>
-     | ^^^^^^^^^^^^^
-> 67 |                 )}
-     | ^^^^^^^^^^^^^
-> 68 |             </AnimatePresence>
-     | ^^^^^^^^^^^^^
-> 69 | 
-     | ^^^^^^^^^^^^^
-> 70 |             <main className="flex-1 h-full overflow-y-auto bg-zinc-50/30 dark:bg-black relative z-10">
-     | ^^^^^^^^^^^^^
-> 71 |                 <div className="p-4 md:p-8 max-w-7xl mx-auto w-full">
-     | ^^^^^^^^^^^^^
-> 72 |                     {children}
-     | ^^^^^^^^^^^^^
-> 73 |                 </div>
-     | ^^^^^^^^^^^^^
-> 74 |             </main>
-     | ^^^^^^^^^^^^^
-> 75 |         </div>
-     | ^^^^^^^^^^^^^
-> 76 |     );
-     | ^^^^^^^^^^^^^
-> 77 | }
-     | ^^^^^^^^^^^^^
-> 78 | 
-     | ^
+[00:00:01.237] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:01.431] Server  LOG     ✓ Ready in 993ms
+[00:00:02.386] Server  LOG     Initializing Firebase Admin SDK for project: "april-pos"
+[00:00:02.427] Server  LOG     Firebase Admin SDK initialized successfully.
+[00:00:03.294] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:15.877] Server  LOG     Starting Comprehensive Migration...
+[00:01:15.878] Server  LOG     --- Migrating Users ---
+[00:01:15.957] Server  LOG     Found 2 users.
+[00:01:16.993] Server  LOG     - Auth User already exists: bkierzen@gmail.com
+[00:01:17.620] Server  LOG     - Auth User already exists: juan@gmail.com
+[00:01:17.621] Server  LOG     --- Migrating Products ---
+[00:01:17.625] Server  LOG     Found 8 products.
+[00:01:18.134] Server  LOG     - Migrated Product: Piattos Cheese
+[00:01:19.317] Server  LOG     - Migrated Product: Coca-Cola 1.5L
+[00:01:19.571] Server  LOG     - Migrated Product: Safeguard White 130g
+[00:01:20.469] Server  LOG     - Migrated Product: Pancit Canton Extra Hot
+[00:01:20.722] Server  LOG     - Migrated Product: Chippy Mild Spicy
+[00:01:21.606] Server  LOG     - Migrated Product: C2 Green Tea 500ml
+[00:01:21.879] Server  LOG     - Migrated Product: Bear Brand Powder 320g
+[00:01:22.755] Server  LOG     - Migrated Product: Lucky Me Instant Mami Chicken
+[00:01:22.756] Server  LOG     --- Migrating Transactions ---
+[00:01:22.761] Server  LOG     Found 4 transactions.
+[00:01:23.870] Server  LOG     - Migrated Transaction: cmjjhd4fb0001uxtgbr5p3gd0
+[00:01:25.720] Server  LOG     - Migrated Transaction: cmjjivabv0002uxiw88ozav8m
+[00:01:26.844] Server  LOG     - Migrated Transaction: cmjjj5jq80008uxiwbvfm1ie8
+[00:01:28.005] Server  LOG     - Migrated Transaction: cmjjoelz50001uxuk0ug2tyjt
+[00:01:28.005] Server  LOG     SUCCESS: Full migration completed.
+[00:01:28.027] Server  LOG     Starting Comprehensive Migration...
+[00:01:28.028] Server  LOG     --- Migrating Users ---
+[00:01:28.032] Server  LOG     Found 2 users.
+[00:01:29.430] Server  LOG     - Auth User already exists: bkierzen@gmail.com
+[00:01:29.991] Server  LOG     - Auth User already exists: juan@gmail.com
+[00:01:29.991] Server  LOG     --- Migrating Products ---
+[00:01:29.996] Server  LOG     Found 8 products.
+[00:01:30.233] Server  LOG     - Migrated Product: Piattos Cheese
+[00:01:31.158] Server  LOG     - Migrated Product: Coca-Cola 1.5L
+[00:01:31.426] Server  LOG     - Migrated Product: Safeguard White 130g
+[00:01:31.721] Server  LOG     - Migrated Product: Pancit Canton Extra Hot
+[00:01:33.109] Server  LOG     - Migrated Product: Chippy Mild Spicy
+[00:01:33.358] Server  LOG     - Migrated Product: C2 Green Tea 500ml
+[00:01:34.277] Server  LOG     - Migrated Product: Bear Brand Powder 320g
+[00:01:34.557] Server  LOG     - Migrated Product: Lucky Me Instant Mami Chicken
+[00:01:34.558] Server  LOG     --- Migrating Transactions ---
+[00:01:34.560] Server  LOG     Found 4 transactions.
+[00:01:35.417] Server  LOG     - Migrated Transaction: cmjjhd4fb0001uxtgbr5p3gd0
+[00:01:37.705] Server  LOG     - Migrated Transaction: cmjjivabv0002uxiw88ozav8m
+[00:01:38.834] Server  LOG     - Migrated Transaction: cmjjj5jq80008uxiwbvfm1ie8
+[00:01:39.961] Server  LOG     - Migrated Transaction: cmjjoelz50001uxuk0ug2tyjt
+[00:01:39.962] Server  LOG     SUCCESS: Full migration completed.
+[00:01:48.256] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:19.183] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:27.052] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:54.858] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: {_seconds: ..., _nanoseconds: 682000000}, isActive: ..., password: ..., updatedAt: ..., role: ...}
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:55.274] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: ..., isActive: ..., password: ..., updatedAt: {_seconds: ..., _nanoseconds: 682000000}, role: ...}
+                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:55.576] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., updatedAt: {_seconds: ..., _nanoseconds: 419000000}, name: ..., description: ..., barcode: ..., image: ..., stock: ..., createdAt: ..., lowStockThreshold: ..., price: ..., category: ...}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:56.013] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., updatedAt: ..., name: ..., description: ..., barcode: ..., image: ..., stock: ..., createdAt: {_seconds: ..., _nanoseconds: 486000000}, lowStockThreshold: ..., price: ..., category: ...}
+                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:56.281] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: {_seconds: ..., _nanoseconds: 682000000}, isActive: ..., password: ..., updatedAt: ..., role: ...}
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:56.514] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: ..., isActive: ..., password: ..., updatedAt: {_seconds: ..., _nanoseconds: 682000000}, role: ...}
+                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:56.781] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., category: "Dairy", barcode: ..., image: ..., lowStockThreshold: ..., name: ..., updatedAt: {_seconds: ..., _nanoseconds: 402000000}, createdAt: ..., stock: ..., description: ..., price: ...}
+                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:57.071] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., category: "Dairy", barcode: ..., image: ..., lowStockThreshold: ..., name: ..., updatedAt: ..., createdAt: {_seconds: ..., _nanoseconds: 484000000}, stock: ..., description: ..., price: ...}
+                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:57.389] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: {_seconds: ..., _nanoseconds: 682000000}, isActive: ..., password: ..., updatedAt: ..., role: ...}
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:57.651] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: ..., isActive: ..., password: ..., updatedAt: {_seconds: ..., _nanoseconds: 682000000}, role: ...}
+                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:58.002] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., image: "", category: "Snacks", stock: ..., updatedAt: {_seconds: ..., _nanoseconds: 711000000}, createdAt: ..., price: ..., barcode: ..., name: ..., lowStockThreshold: ..., description: ...}
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:58.292] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., image: "", category: "Snacks", stock: ..., updatedAt: ..., createdAt: {_seconds: ..., _nanoseconds: 318000000}, price: ..., barcode: ..., name: ..., lowStockThreshold: ..., description: ...}
+                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:58.634] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., image: "", price: 28, lowStockThreshold: ..., createdAt: {_seconds: ..., _nanoseconds: 476000000}, barcode: ..., category: ..., name: ..., stock: ..., updatedAt: ..., description: ...}
+                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:59.100] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., image: "", price: 28, lowStockThreshold: ..., createdAt: ..., barcode: ..., category: ..., name: ..., stock: ..., updatedAt: {_seconds: ..., _nanoseconds: 713000000}, description: ...}
+                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:59.396] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., category: "Dairy", barcode: ..., image: ..., lowStockThreshold: ..., name: ..., updatedAt: {_seconds: ..., _nanoseconds: 402000000}, createdAt: ..., stock: ..., description: ..., price: ...}
+                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:02:59.665] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., category: "Dairy", barcode: ..., image: ..., lowStockThreshold: ..., name: ..., updatedAt: ..., createdAt: {_seconds: ..., _nanoseconds: 484000000}, stock: ..., description: ..., price: ...}
+                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:00.164] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: {_seconds: ..., _nanoseconds: 682000000}, isActive: ..., password: ..., updatedAt: ..., role: ...}
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:00.482] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: ..., isActive: ..., password: ..., updatedAt: {_seconds: ..., _nanoseconds: 682000000}, role: ...}
+                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:00.818] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., image: "", category: "Snacks", stock: ..., updatedAt: {_seconds: ..., _nanoseconds: 711000000}, createdAt: ..., price: ..., barcode: ..., name: ..., lowStockThreshold: ..., description: ...}
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:01.247] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., image: "", category: "Snacks", stock: ..., updatedAt: ..., createdAt: {_seconds: ..., _nanoseconds: 318000000}, price: ..., barcode: ..., name: ..., lowStockThreshold: ..., description: ...}
+                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:01.752] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: {_seconds: ..., _nanoseconds: 682000000}, isActive: ..., password: ..., updatedAt: ..., role: ...}
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:02.041] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: ..., isActive: ..., password: ..., updatedAt: {_seconds: ..., _nanoseconds: 682000000}, role: ...}
+                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:02.435] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., updatedAt: {_seconds: ..., _nanoseconds: 419000000}, name: ..., description: ..., barcode: ..., image: ..., stock: ..., createdAt: ..., lowStockThreshold: ..., price: ..., category: ...}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:02.764] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., updatedAt: ..., name: ..., description: ..., barcode: ..., image: ..., stock: ..., createdAt: {_seconds: ..., _nanoseconds: 486000000}, lowStockThreshold: ..., price: ..., category: ...}
+                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:03.002] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: {_seconds: ..., _nanoseconds: 682000000}, isActive: ..., password: ..., updatedAt: ..., role: ...}
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:03.331] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: ..., isActive: ..., password: ..., updatedAt: {_seconds: ..., _nanoseconds: 682000000}, role: ...}
+                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:03.699] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., category: "Dairy", barcode: ..., image: ..., lowStockThreshold: ..., name: ..., updatedAt: {_seconds: ..., _nanoseconds: 402000000}, createdAt: ..., stock: ..., description: ..., price: ...}
+                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:03.930] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., category: "Dairy", barcode: ..., image: ..., lowStockThreshold: ..., name: ..., updatedAt: ..., createdAt: {_seconds: ..., _nanoseconds: 484000000}, stock: ..., description: ..., price: ...}
+                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:04.211] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: {_seconds: ..., _nanoseconds: 682000000}, isActive: ..., password: ..., updatedAt: ..., role: ...}
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:04.527] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: ..., isActive: ..., password: ..., updatedAt: {_seconds: ..., _nanoseconds: 682000000}, role: ...}
+                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:04.805] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., image: "", category: "Snacks", stock: ..., updatedAt: {_seconds: ..., _nanoseconds: 711000000}, createdAt: ..., price: ..., barcode: ..., name: ..., lowStockThreshold: ..., description: ...}
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:05.145] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., image: "", category: "Snacks", stock: ..., updatedAt: ..., createdAt: {_seconds: ..., _nanoseconds: 318000000}, price: ..., barcode: ..., name: ..., lowStockThreshold: ..., description: ...}
+                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:05.454] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., image: "", price: 28, lowStockThreshold: ..., createdAt: {_seconds: ..., _nanoseconds: 476000000}, barcode: ..., category: ..., name: ..., stock: ..., updatedAt: ..., description: ...}
+                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:05.689] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., image: "", price: 28, lowStockThreshold: ..., createdAt: ..., barcode: ..., category: ..., name: ..., stock: ..., updatedAt: {_seconds: ..., _nanoseconds: 713000000}, description: ...}
+                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:05.955] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., category: "Dairy", barcode: ..., image: ..., lowStockThreshold: ..., name: ..., updatedAt: {_seconds: ..., _nanoseconds: 402000000}, createdAt: ..., stock: ..., description: ..., price: ...}
+                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:06.295] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., category: "Dairy", barcode: ..., image: ..., lowStockThreshold: ..., name: ..., updatedAt: ..., createdAt: {_seconds: ..., _nanoseconds: 484000000}, stock: ..., description: ..., price: ...}
+                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:06.566] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: {_seconds: ..., _nanoseconds: 682000000}, isActive: ..., password: ..., updatedAt: ..., role: ...}
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:06.788] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: ..., isActive: ..., password: ..., updatedAt: {_seconds: ..., _nanoseconds: 682000000}, role: ...}
+                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:07.061] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., image: "", category: "Snacks", stock: ..., updatedAt: {_seconds: ..., _nanoseconds: 711000000}, createdAt: ..., price: ..., barcode: ..., name: ..., lowStockThreshold: ..., description: ...}
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:07.377] Server  ERROR   ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., image: "", category: "Snacks", stock: ..., updatedAt: ..., createdAt: {_seconds: ..., _nanoseconds: 318000000}, price: ..., barcode: ..., name: ..., lowStockThreshold: ..., description: ...}
+                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:07.380] Browser ERROR   unhandledRejection: Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: {_seconds: ..., _nanoseconds: 682000000}, isActive: ..., password: ..., updatedAt: ..., role: ...}
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:03:07.610] Browser ERROR   unhandledRejection: Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  {id: ..., name: "Kierzen", email: ..., createdAt: {_seconds: ..., _nanoseconds: 682000000}, isActive: ..., password: ..., updatedAt: ..., role: ...}
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[00:04:05.707] Server  LOG     ✓ Compiled in 641ms
+[00:04:06.606] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
 
-Unterminated template
-[00:02:28.333] Server  LOG     ✓ Compiled in 626ms
-[00:02:28.733] Browser ERROR   ./src/app/admin/layout.tsx:1:3
-Parsing ecmascript source code failed
->  1 | ```
-     |   ^
->  2 | "use client";
-     | ^^^^^^^^^^^^^
->  3 | 
-     | ^^^^^^^^^^^^^
->  4 | import { AdminSidebar } from "@/components/shared/Sidebar";
-     | ^^^^^^^^^^^^^
->  5 | import { useState } from "react";
-     | ^^^^^^^^^^^^^
->  6 | import { Button } from "@/components/ui/button";
-     | ^^^^^^^^^^^^^
->  7 | import { Menu, X } from "lucide-react";
-     | ^^^^^^^^^^^^^
->  8 | import { AnimatePresence, motion } from "framer-motion";
-     | ^^^^^^^^^^^^^
->  9 | import { NotificationBell } from "@/components/shared/NotificationBell";
-     | ^^^^^^^^^^^^^
-> 10 | import { ThemeToggle } from "@/components/shared/ThemeToggle"; // Added ThemeToggle import
-     | ^^^^^^^^^^^^^
-> 11 | 
-     | ^^^^^^^^^^^^^
-> 12 | export default function AdminLayout({
-     | ^^^^^^^^^^^^^
-> 13 |     children,
-     | ^^^^^^^^^^^^^
-> 14 | }: {
-     | ^^^^^^^^^^^^^
-> 15 |     children: React.ReactNode;
-     | ^^^^^^^^^^^^^
-> 16 | }) {
-     | ^^^^^^^^^^^^^
-> 17 |     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-     | ^^^^^^^^^^^^^
-> 18 | 
-     | ^^^^^^^^^^^^^
-> 19 |     return (
-     | ^^^^^^^^^^^^^
-> 20 |         <div className="flex flex-col md:flex-row h-screen w-full bg-background overflow-hidden relative">
-     | ^^^^^^^^^^^^^
-> 21 |             {/* Mobile Header */}
-     | ^^^^^^^^^^^^^
-> 22 |             <header className="md:hidden flex items-center justify-between p-4 border-b border-border bg-card sticky top-0 z-50">
-     | ^^^^^^^^^^^^^
-> 23 |                 <h1 className="text-xl font-black text-primary italic tracking-tighter">APRIL.POS</h1>
-     | ^^^^^^^^^^^^^
-> 24 |                 <div className="flex items-center gap-2">
-     | ^^^^^^^^^^^^^
-> 25 |                     <NotificationBell />
-     | ^^^^^^^^^^^^^
-> 26 |                     <Button variant="ghost" size="icon" onClick={() => setIsSidebarOpen(true)}>
-     | ^^^^^^^^^^^^^
-> 27 |                         <Menu className="w-6 h-6" />
-     | ^^^^^^^^^^^^^
-> 28 |                     </Button>
-     | ^^^^^^^^^^^^^
-> 29 |                 </div>
-     | ^^^^^^^^^^^^^
-> 30 |             </header>
-     | ^^^^^^^^^^^^^
-> 31 | 
-     | ^^^^^^^^^^^^^
-> 32 |             {/* Desktop Sidebar */}
-     | ^^^^^^^^^^^^^
-> 33 |             <div className="hidden md:block w-64 shrink-0 h-full z-40 border-r border-border">
-     | ^^^^^^^^^^^^^
-> 34 |                 <AdminSidebar />
-     | ^^^^^^^^^^^^^
-> 35 |             </div>
-     | ^^^^^^^^^^^^^
-> 36 | 
-     | ^^^^^^^^^^^^^
-> 37 |             {/* Mobile Sidebar Overlay */}
-     | ^^^^^^^^^^^^^
-> 38 |             <AnimatePresence>
-     | ^^^^^^^^^^^^^
-> 39 |                 {isSidebarOpen && (
-     | ^^^^^^^^^^^^^
-> 40 |                     <>
-     | ^^^^^^^^^^^^^
-> 41 |                         <motion.div
-     | ^^^^^^^^^^^^^
-> 42 |                             initial={{ opacity: 0 }}
-     | ^^^^^^^^^^^^^
-> 43 |                             animate={{ opacity: 1 }}
-     | ^^^^^^^^^^^^^
-> 44 |                             exit={{ opacity: 0 }}
-     | ^^^^^^^^^^^^^
-> 45 |                             onClick={() => setIsSidebarOpen(false)}
-     | ^^^^^^^^^^^^^
-> 46 |                             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] md:hidden"
-     | ^^^^^^^^^^^^^
-> 47 |                         />
-     | ^^^^^^^^^^^^^
-> 48 |                         <motion.div
-     | ^^^^^^^^^^^^^
-> 49 |                             initial={{ x: "-100%" }}
-     | ^^^^^^^^^^^^^
-> 50 |                             animate={{ x: 0 }}
-     | ^^^^^^^^^^^^^
-> 51 |                             exit={{ x: "-100%" }}
-     | ^^^^^^^^^^^^^
-> 52 |                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-     | ^^^^^^^^^^^^^
-> 53 |                             className="fixed inset-y-0 left-0 w-[280px] bg-card z-[100] md:hidden shadow-2xl"
-     | ^^^^^^^^^^^^^
-> 54 |                         >
-     | ^^^^^^^^^^^^^
-> 55 |                             <div className="flex flex-col h-full">
-     | ^^^^^^^^^^^^^
-> 56 |                                 <div className="p-4 flex justify-end border-b border-border">
-     | ^^^^^^^^^^^^^
-> 57 |                                     <Button variant="ghost" size="icon" onClick={() => setIsSidebarOpen(false)}>
-     | ^^^^^^^^^^^^^
-> 58 |                                         <X className="w-6 h-6" />
-     | ^^^^^^^^^^^^^
-> 59 |                                     </Button>
-     | ^^^^^^^^^^^^^
-> 60 |                                 </div>
-     | ^^^^^^^^^^^^^
-> 61 |                                 <div className="flex-1 overflow-y-auto">
-     | ^^^^^^^^^^^^^
-> 62 |                                     <AdminSidebar />
-     | ^^^^^^^^^^^^^
-> 63 |                                 </div>
-     | ^^^^^^^^^^^^^
-> 64 |                             </div>
-     | ^^^^^^^^^^^^^
-> 65 |                         </motion.div>
-     | ^^^^^^^^^^^^^
-> 66 |                     </>
-     | ^^^^^^^^^^^^^
-> 67 |                 )}
-     | ^^^^^^^^^^^^^
-> 68 |             </AnimatePresence>
-     | ^^^^^^^^^^^^^
-> 69 | 
-     | ^^^^^^^^^^^^^
-> 70 |             <main className="flex-1 h-full overflow-y-auto bg-zinc-50/30 dark:bg-black relative z-10">
-     | ^^^^^^^^^^^^^
-> 71 |                 <div className="p-4 md:p-8 max-w-7xl mx-auto w-full">
-     | ^^^^^^^^^^^^^
-> 72 |                     {children}
-     | ^^^^^^^^^^^^^
-> 73 |                 </div>
-     | ^^^^^^^^^^^^^
-> 74 |             </main>
-     | ^^^^^^^^^^^^^
-> 75 |         </div>
-     | ^^^^^^^^^^^^^
-> 76 |     );
-     | ^^^^^^^^^^^^^
-> 77 | }
-     | ^^^^^^^^^^^^^
-> 78 | 
-     | ^
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
 
-Unterminated template
-[00:02:40.035] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:03:00.226] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:03:01.157] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:03:01.157] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:03:37.885] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:03:37.885] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:03:44.128] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:03:44.128] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:03:50.684] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:03:50.684] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:04:18.744] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:04:18.744] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[02:25:43.345] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:25:44.303] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:25:45.186] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:25:48.926] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:06.606] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:06.606] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:06.606] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:10.680] Server  ERROR   ⨯ ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+
+
+
+./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+
+
+[00:04:15.554] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:15.554] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:15.554] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:15.554] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:16.614] Browser ERROR   unhandledRejection: Error: An unexpected response was received from the server.
+[00:04:16.614] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:16.614] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:16.614] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:16.614] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:30.648] Server  LOG     ✓ Compiled in 693ms
+[00:04:31.605] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:31.605] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:31.605] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:31.605] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:40.665] Server  ERROR   ⨯ ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+
+
+
+./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+
+
+[00:04:41.615] Browser ERROR   unhandledRejection: Error: An unexpected response was received from the server.
+[00:04:41.615] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:41.615] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:41.615] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:41.615] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:56.902] Browser ERROR   [next-auth][error][CLIENT_FETCH_ERROR] 
+https://next-auth.js.org/errors#client_fetch_error Unexpected token '<', "<!DOCTYPE "... is not valid JSON {"error":{"message":"Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON","name":"SyntaxError","stack":"SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"},"message":"Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON","url":"/api/auth/session"}
+[00:04:56.902] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:56.902] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:56.902] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:56.902] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:56.902] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:56.902] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:56.902] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:56.902] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:56.902] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:56.902] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:04:56.902] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:56.902] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:04:59.546] Server  ERROR   ⨯ ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+
+
+
+./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+
+
+[00:04:59.832] Browser ERROR   uncaughtError: Error: ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+
+
+[00:05:00.097] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:05:00.097] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:05:00.097] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:00.097] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:00.097] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:00.097] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:00.097] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:00.097] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:00.097] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:00.097] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:00.097] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:00.097] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:00.097] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:05:00.097] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:05:00.097] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:00.097] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:05.178] Server  ERROR   ⨯ ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+
+
+
+./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+
+
+[00:05:05.623] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:05:05.623] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:05:05.623] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:05.623] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:05.695] Browser ERROR   uncaughtError: Error: ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+
+
+[00:05:05.873] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:05:05.873] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:05:05.873] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:05.873] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:05.873] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:05.873] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:05.873] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:05.873] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:05.873] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:05.873] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:05.873] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:05.873] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/shared/NotificationBell.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Client Component Browser]
+    ./src/app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/shared/NotificationBell.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Client Component SSR]
+    ./src/app/admin/layout.tsx [Server Component]
+[00:05:05.873] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:05:05.873] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:05:05.873] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:05.873] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:06.605] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:05:06.605] Browser ERROR   ./src/components/shared/NotificationBell.tsx:14:1
+Export getLowStockCount doesn't exist in target module
+  12 | import { Button } from "@/components/ui/button";
+  13 | import { Badge } from "@/components/ui/badge";
+> 14 | import { getLowStockCount } from "@/lib/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import Link from "next/link";
+  16 |
+  17 | export function NotificationBell() {
+
+The export getLowStockCount was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import getProducts?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/shared/NotificationBell.tsx
+    ./src/app/pos/page.tsx
+[00:05:06.605] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:06.605] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:26.438] Server  LOG     ✓ Compiled in 386ms
+[00:05:26.616] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-client] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:26.616] Browser ERROR   ./src/app/admin/users/page.tsx:4:1
+Export adminCreateUser doesn't exist in target module
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { getUsers, toggleUserActivation, adminCreateUser } from "@/lib/actions";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import {
+  6 |     Table,
+  7 |     TableBody,
+
+The export adminCreateUser was not found in module [project]/src/lib/actions.ts [app-ssr] (ecmascript).
+Did you mean to import registerUser?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/users/page.tsx [Client Component Browser]
+    ./src/app/admin/users/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/users/page.tsx [Client Component SSR]
+    ./src/app/admin/users/page.tsx [Server Component]
+[00:05:51.030] Server  LOG     ✓ Compiled in 290ms
+[00:05:51.711] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:56.505] Server  ERROR   Sale error: Error: Firestore transactions require all reads to be executed before all writes.
+[00:07:32.822] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:31.846] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

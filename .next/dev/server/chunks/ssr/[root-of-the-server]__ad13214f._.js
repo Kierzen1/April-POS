@@ -101,7 +101,7 @@ __turbopack_context__.s([
     ()=>authOptions
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$providers$2f$credentials$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next-auth/providers/credentials.js [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/prisma.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$firebase$2d$admin$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/firebase-admin.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/bcryptjs/index.js [app-rsc] (ecmascript)");
 ;
 ;
@@ -122,16 +122,24 @@ const authOptions = {
             },
             async authorize (credentials) {
                 if (!credentials?.email || !credentials?.password) return null;
-                const user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].user.findUnique({
-                    where: {
-                        email: credentials.email
-                    }
-                });
-                if (!user) return null;
+                const usersSnap = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$firebase$2d$admin$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["adminDb"].collection("users").where("email", "==", credentials.email).get();
+                if (usersSnap.empty) {
+                    console.log(`Login failed: No user found with email ${credentials.email}`);
+                    return null;
+                }
+                const userDoc = usersSnap.docs[0];
+                const user = userDoc.data();
+                if (!user.password) {
+                    console.log(`Login failed: User ${credentials.email} has no password set in Firestore.`);
+                    return null;
+                }
                 const isValid = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].compare(credentials.password, user.password);
-                if (!isValid) return null;
+                if (!isValid) {
+                    console.log(`Login failed: Invalid password for user ${credentials.email}`);
+                    return null;
+                }
                 return {
-                    id: user.id,
+                    id: userDoc.id,
                     email: user.email,
                     name: user.name,
                     role: user.role,

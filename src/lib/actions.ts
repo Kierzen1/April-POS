@@ -1,9 +1,38 @@
 "use server";
 
-import prisma from "@/lib/prisma";
+import { adminDb, adminAuth } from "@/lib/firebase-admin";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
-import { Prisma } from "@prisma/client";
+
+// Helper to sanitize Firestore data for Next.js Client Components
+function sanitizeData(data: any): any {
+    if (!data) return data;
+
+    // Handle Firestore Timestamp
+    if (data && typeof data.toDate === 'function') {
+        return data.toDate().toISOString();
+    }
+
+    if (Array.isArray(data)) {
+        return data.map(sanitizeData);
+    }
+
+    if (typeof data === 'object' && data !== null) {
+        // Handle native Date objects - convert to ISO string for safe serialization
+        if (data instanceof Date) {
+            return data.toISOString();
+        }
+
+        const sanitized: any = {};
+        for (const [key, value] of Object.entries(data)) {
+            if (key === 'password') continue; // Security: Never send passwords to client
+            sanitized[key] = sanitizeData(value);
+        }
+        return sanitized;
+    }
+
+    return data;
+}
 
 const registerSchema = z.object({
     name: z.string().min(2, "Name is too short"),
@@ -23,29 +52,33 @@ export async function registerUser(formData: FormData) {
     }
 
     try {
-        const existingUser = await prisma.user.findUnique({
-            where: { email },
-        });
+        const userSnap = await adminDb.collection("users").where("email", "==", email).get();
 
-        if (existingUser) {
+        if (!userSnap.empty) {
             return { error: "User already exists" };
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
+        const usersSnap = await adminDb.collection("users").count().get();
+        const userCount = usersSnap.data().count;
 
-        // First user created in the system should be an ADMIN and ACTIVE
-        const userCount = await prisma.user.count();
         const role = userCount === 0 ? "ADMIN" : "STAFF";
         const isActive = userCount === 0;
 
-        await prisma.user.create({
-            data: {
-                name,
-                email,
-                password: hashedPassword,
-                role,
-                isActive,
-            },
+        const authUser = await adminAuth.createUser({
+            email,
+            password,
+            displayName: name,
+        });
+
+        await adminDb.collection("users").doc(authUser.uid).set({
+            name,
+            email,
+            password: hashedPassword,
+            role,
+            isActive,
+            createdAt: new Date(),
+            updatedAt: new Date(),
         });
 
         return { success: true };
@@ -75,24 +108,30 @@ export async function adminCreateUser(formData: FormData) {
     }
 
     try {
-        const existingUser = await prisma.user.findUnique({
-            where: { email },
-        });
+        const userSnap = await adminDb.collection("users").where("email", "==", email).get();
 
-        if (existingUser) {
+        if (!userSnap.empty) {
             return { error: "User already exists" };
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        await prisma.user.create({
-            data: {
-                name,
-                email,
-                password: hashedPassword,
-                role,
-                isActive: true, // Admin-created users are active by default
-            },
+        // 1. Create in Firebase Auth
+        const authUser = await adminAuth.createUser({
+            email,
+            password,
+            displayName: name,
+        });
+
+        // 2. Create in Firestore
+        await adminDb.collection("users").doc(authUser.uid).set({
+            name,
+            email,
+            password: hashedPassword,
+            role,
+            isActive: true, // Admin-created users are active by default
+            createdAt: new Date(),
+            updatedAt: new Date(),
         });
 
         return { success: true };
@@ -104,120 +143,122 @@ export async function adminCreateUser(formData: FormData) {
 
 // User Management
 export async function getUsers() {
-    return await prisma.user.findMany({
-        orderBy: { createdAt: "desc" },
-    });
+    try {
+        const snap = await adminDb.collection("users").orderBy("createdAt", "desc").get();
+        return snap.docs.map(doc => sanitizeData({
+            id: doc.id,
+            ...doc.data()
+        }));
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        return [];
+    }
 }
 
 export async function toggleUserActivation(userId: string) {
-    const user = await prisma.user.findUnique({ where: { id: userId } });
-    if (!user) return { error: "User not found" };
+    const docRef = adminDb.collection("users").doc(userId);
+    const doc = await docRef.get();
 
-    await prisma.user.update({
-        where: { id: userId },
-        data: { isActive: !user.isActive },
-    });
+    if (!doc.exists) return { error: "User not found" };
+
+    const currentStatus = doc.data()?.isActive;
+    await docRef.update({ isActive: !currentStatus });
+    await adminAuth.updateUser(userId, { disabled: currentStatus });
 
     return { success: true };
 }
 
 // Product Management
 export async function getProducts() {
-    const products = await prisma.product.findMany({
-        include: {
-            items: {
-                select: {
-                    quantity: true
-                }
-            }
-        },
-        orderBy: { updatedAt: "desc" },
-    });
+    try {
+        const snap = await adminDb.collection("products").orderBy("updatedAt", "desc").get();
+        const products = snap.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
 
-    // Convert Decimal to number and calculate sold count
-    return products.map((p: any) => {
-        const soldCount = p.items.reduce((sum: number, item: any) => sum + item.quantity, 0);
-        return {
+        const txItemsSnap = await adminDb.collection("transaction_items").get();
+        const soldCounts: Record<string, number> = {};
+
+        txItemsSnap.docs.forEach(doc => {
+            const item = doc.data();
+            soldCounts[item.productId] = (soldCounts[item.productId] || 0) + (item.quantity || 0);
+        });
+
+        return products.map(p => sanitizeData({
             ...p,
-            price: Number(p.price),
-            soldCount,
-            items: undefined // Remove items array to keep object clean
-        };
-    });
+            price: Number((p as any).price || 0),
+            soldCount: soldCounts[p.id] || 0
+        }));
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        return [];
+    }
 }
 
 export async function getLowStockCount() {
-    const products = await prisma.product.findMany({
-        select: {
-            id: true,
-            name: true,
-            stock: true,
-            lowStockThreshold: true,
-        }
-    });
+    try {
+        const snap = await adminDb.collection("products").get();
+        const products = snap.docs.map(doc => ({
+            id: doc.id,
+            name: doc.data().name,
+            stock: doc.data().stock,
+            lowStockThreshold: doc.data().lowStockThreshold || 5,
+        }));
 
-    const lowStockItems = products.filter(p => p.stock <= (p.lowStockThreshold || 5));
-    return {
-        count: lowStockItems.length,
-        items: lowStockItems
-    };
+        const lowStockItems = products.filter(p => p.stock <= p.lowStockThreshold);
+        return sanitizeData({
+            count: lowStockItems.length,
+            items: lowStockItems
+        });
+    } catch (error) {
+        console.error("Error fetching low stock count:", error);
+        return { count: 0, items: [] };
+    }
 }
 
 export async function getProductByBarcode(barcode: string) {
     const trimmedBarcode = barcode.trim();
-    const product = await prisma.product.findUnique({
-        where: { barcode: trimmedBarcode },
-        include: {
-            items: {
-                select: {
-                    quantity: true
-                }
-            }
-        }
-    });
+    const snap = await adminDb.collection("products").where("barcode", "==", trimmedBarcode).get();
 
-    if (!product) return null;
+    if (snap.empty) return null;
 
-    const soldCount = (product as any).items.reduce((sum: number, item: any) => sum + item.quantity, 0);
-
-    return {
-        ...product,
-        price: Number(product.price),
-        soldCount,
-        items: undefined
+    const doc = snap.docs[0];
+    const product = {
+        id: doc.id,
+        ...doc.data()
     };
+
+    const txItemsSnap = await adminDb.collection("transaction_items").where("productId", "==", doc.id).get();
+    const soldCount = txItemsSnap.docs.reduce((sum, d) => sum + (d.data().quantity || 0), 0);
+
+    return sanitizeData({
+        ...product,
+        price: Number((product as any).price || 0),
+        soldCount
+    });
 }
 
 export async function upsertProduct(data: any) {
     const { id, barcode, name, price, stock, lowStockThreshold, category, image } = data;
-    const parsedPrice = new Prisma.Decimal(parseFloat(price) || 0);
-    const parsedStock = parseInt(stock) || 0;
-    const parsedThreshold = parseInt(lowStockThreshold) || 5;
+
+    const firestoreData = {
+        barcode: String(barcode),
+        name: String(name),
+        price: parseFloat(price) || 0,
+        stock: parseInt(stock) || 0,
+        lowStockThreshold: parseInt(lowStockThreshold) || 5,
+        category: category || "General",
+        image: image || "",
+        updatedAt: new Date(),
+    };
 
     if (id) {
-        await prisma.product.update({
-            where: { id },
-            data: {
-                barcode,
-                name,
-                price: parsedPrice,
-                stock: parsedStock,
-                lowStockThreshold: parsedThreshold,
-                category,
-                image
-            },
-        });
+        await adminDb.collection("products").doc(id).update(firestoreData);
     } else {
-        await prisma.product.create({
-            data: {
-                barcode,
-                name,
-                price: parsedPrice,
-                stock: parsedStock,
-                lowStockThreshold: parsedThreshold,
-                category,
-                image
-            },
+        await adminDb.collection("products").add({
+            ...firestoreData,
+            createdAt: new Date(),
         });
     }
 
@@ -225,39 +266,50 @@ export async function upsertProduct(data: any) {
 }
 
 export async function deleteProduct(id: string) {
-    await prisma.product.delete({ where: { id } });
+    await adminDb.collection("products").doc(id).delete();
     return { success: true };
 }
 
 // Transaction Management
 export async function completeSale(cashierId: string, items: any[], total: number) {
     try {
-        await prisma.$transaction(async (tx: any) => {
-            // 1. Create Transaction
-            await tx.transaction.create({
-                data: {
-                    cashierId,
-                    total,
-                    items: {
-                        create: items.map(item => ({
-                            productId: item.productId,
-                            quantity: item.quantity,
-                            priceAtTime: item.price
-                        }))
-                    }
-                }
+        await adminDb.runTransaction(async (transaction) => {
+            // 1. PERFORM ALL READS FIRST
+            const productDocs = [];
+            for (const item of items) {
+                const productRef = adminDb.collection("products").doc(item.productId);
+                const doc = await transaction.get(productRef);
+                productDocs.push({ ref: productRef, doc });
+            }
+
+            // 2. PERFORM ALL WRITES SECOND
+            const txRef = adminDb.collection("transactions").doc();
+
+            transaction.set(txRef, {
+                cashierId,
+                total: Number(total),
+                createdAt: new Date(),
             });
 
-            // 2. Update Stocks
-            for (const item of items) {
-                await tx.product.update({
-                    where: { id: item.productId },
-                    data: {
-                        stock: {
-                            decrement: item.quantity
-                        }
-                    }
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+                const { ref: productRef, doc: productDoc } = productDocs[i];
+
+                const itemRef = adminDb.collection("transaction_items").doc();
+                transaction.set(itemRef, {
+                    transactionId: txRef.id,
+                    productId: item.productId,
+                    quantity: item.quantity,
+                    priceAtTime: Number(item.price),
                 });
+
+                if (productDoc.exists) {
+                    const currentStock = productDoc.data()?.stock || 0;
+                    transaction.update(productRef, {
+                        stock: currentStock - item.quantity,
+                        updatedAt: new Date()
+                    });
+                }
             }
         });
 
@@ -269,28 +321,42 @@ export async function completeSale(cashierId: string, items: any[], total: numbe
 }
 
 export async function getTransactions() {
-    const transactions = await prisma.transaction.findMany({
-        include: {
-            cashier: true,
-            items: {
-                include: {
-                    product: true
-                }
-            }
-        },
-        orderBy: { createdAt: "desc" }
-    });
+    try {
+        const snap = await adminDb.collection("transactions").orderBy("createdAt", "desc").get();
+        const transactions = [];
 
-    return transactions.map((tx: any) => ({
-        ...tx,
-        total: Number(tx.total),
-        items: tx.items.map((item: any) => ({
-            ...item,
-            priceAtTime: Number(item.priceAtTime),
-            product: item.product ? {
-                ...item.product,
-                price: Number(item.product.price)
-            } : null
-        }))
-    }));
+        for (const doc of snap.docs) {
+            const txData = doc.data();
+
+            const cashierDoc = await adminDb.collection("users").doc(txData.cashierId).get();
+            const cashier = cashierDoc.exists ? { id: cashierDoc.id, ...cashierDoc.data() } : null;
+
+            const itemsSnap = await adminDb.collection("transaction_items").where("transactionId", "==", doc.id).get();
+            const items = [];
+
+            for (const itemDoc of itemsSnap.docs) {
+                const itemData = itemDoc.data();
+                const productDoc = await adminDb.collection("products").doc(itemData.productId).get();
+                const product = productDoc.exists ? { id: productDoc.id, ...productDoc.data() } : null;
+
+                items.push({
+                    ...itemData,
+                    id: itemDoc.id,
+                    product
+                });
+            }
+
+            transactions.push({
+                id: doc.id,
+                ...txData,
+                cashier,
+                items
+            });
+        }
+
+        return sanitizeData(transactions);
+    } catch (error) {
+        console.error("Error fetching transactions:", error);
+        return [];
+    }
 }

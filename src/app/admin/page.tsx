@@ -1,41 +1,33 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Users, Package, ShoppingCart, TrendingUp, History } from "lucide-react";
-import prisma from "@/lib/prisma";
+import { adminDb } from "@/lib/firebase-admin";
 import Link from "next/link";
 
 async function getStats() {
-    const userCount = await prisma.user.count();
-    const productCount = await prisma.product.count();
-    const transactionCount = await prisma.transaction.count();
+    const usersSnap = await adminDb.collection("users").count().get();
+    const productsSnap = await adminDb.collection("products").count().get();
+    const transactionsSnap = await adminDb.collection("transactions").count().get();
 
-    const products = await prisma.product.findMany({
-        include: {
-            items: {
-                select: {
-                    quantity: true
-                }
-            }
-        }
-    });
+    const userCount = usersSnap.data().count;
+    const productCount = productsSnap.data().count;
+    const transactionCount = transactionsSnap.data().count;
 
-    const lowStockCount = products.filter(p => p.stock <= (p.lowStockThreshold || 5)).length;
+    // Fetch products to check for low stock
+    const productsDocs = await adminDb.collection("products").get();
+    const lowStockCount = productsDocs.docs.filter(doc => {
+        const data = doc.data();
+        return data.stock <= (data.lowStockThreshold || 5);
+    }).length;
 
     // Calculate today's sales
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const todayTransactions = await prisma.transaction.findMany({
-        where: {
-            createdAt: {
-                gte: today
-            }
-        },
-        select: {
-            total: true
-        }
-    });
+    const todayTransactionsSnap = await adminDb.collection("transactions")
+        .where("createdAt", ">=", today)
+        .get();
 
-    const todaySales = todayTransactions.reduce((sum: number, t: { total: any }) => sum + Number(t.total), 0);
+    const todaySales = todayTransactionsSnap.docs.reduce((sum, doc) => sum + Number(doc.data().total || 0), 0);
 
     return { userCount, productCount, transactionCount, todaySales, lowStockCount };
 }

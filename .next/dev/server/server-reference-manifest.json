@@ -32,8 +32,26 @@
     },
     "00b7da2130fcff59e6ef4e2860acc4be0dc7f333a5": {
       "workers": {
+        "app/admin/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getLowStockCount",
+          "filename": "src/lib/actions.ts"
+        },
         "app/admin/products/page": {
           "moduleId": "[project]/.next-internal/server/app/admin/products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getLowStockCount",
+          "filename": "src/lib/actions.ts"
+        },
+        "app/admin/transactions/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/transactions/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getLowStockCount",
+          "filename": "src/lib/actions.ts"
+        },
+        "app/admin/users/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/users/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "getLowStockCount",
           "filename": "src/lib/actions.ts"
@@ -46,7 +64,10 @@
         }
       },
       "layer": {
+        "app/admin/page": "action-browser",
         "app/admin/products/page": "action-browser",
+        "app/admin/transactions/page": "action-browser",
+        "app/admin/users/page": "action-browser",
         "app/pos/page": "action-browser"
       },
       "filename": "src/lib/actions.ts",
@@ -96,6 +117,66 @@
       },
       "filename": "src/lib/actions.ts",
       "exportedName": "deleteProduct"
+    },
+    "0010a0e7e03244c85b1ef1e76c577415abfc878172": {
+      "workers": {
+        "app/admin/users/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/users/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getUsers",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/users/page": "action-browser"
+      },
+      "filename": "src/lib/actions.ts",
+      "exportedName": "getUsers"
+    },
+    "40e676a01cbb53febeaec99ec96860933e8c2ec0fd": {
+      "workers": {
+        "app/admin/users/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/users/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "toggleUserActivation",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/users/page": "action-browser"
+      },
+      "filename": "src/lib/actions.ts",
+      "exportedName": "toggleUserActivation"
+    },
+    "40dbf2964ef7daa9133c2476e2c0b9d1ea785a590e": {
+      "workers": {
+        "app/admin/users/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/users/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "adminCreateUser",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/users/page": "action-browser"
+      },
+      "filename": "src/lib/actions.ts",
+      "exportedName": "adminCreateUser"
+    },
+    "009d9c4f32d6b7eabfbb33c4bdababb53aed6d5f5d": {
+      "workers": {
+        "app/admin/transactions/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/transactions/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getTransactions",
+          "filename": "src/lib/actions.ts"
+        }
+      },
+      "layer": {
+        "app/admin/transactions/page": "action-browser"
+      },
+      "filename": "src/lib/actions.ts",
+      "exportedName": "getTransactions"
     }
   },
   "edge": {},
